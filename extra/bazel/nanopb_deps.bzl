@@ -1,17 +1,26 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 def nanopb_deps():
+    if "bazel_skylib" not in native.existing_rules():
+        http_archive(
+            name = "bazel_skylib",
+            sha256 = "cd55a062e763b9349921f0f5db8c3933288dc8ba4f76dd9416aac68acee3cb94",
+            urls = [
+                "https://mirror.bazel.build/github.com/bazelbuild/bazel-skylib/releases/download/1.5.0/bazel-skylib-1.5.0.tar.gz",
+                "https://github.com/bazelbuild/bazel-skylib/releases/download/1.5.0/bazel-skylib-1.5.0.tar.gz",
+            ],
+        )
+
     # Setup proto rules.
     # Used by: com_github_nanopb_nanopb, rules_proto_grpc.
     # Used in modules: root.
     if "rules_proto" not in native.existing_rules():
         http_archive(
             name = "rules_proto",
-            sha256 = "66bfdf8782796239d3875d37e7de19b1d94301e8972b3cbd2446b332429b4df1",
-            strip_prefix = "rules_proto-4.0.0",
+            sha256 = "dc3fb206a2cb3441b485eb1e423165b231235a1ea9b031b4433cf7bc1fa460dd",
+            strip_prefix = "rules_proto-5.3.0-21.7",
             urls = [
-                "https://mirror.bazel.build/github.com/bazelbuild/rules_proto/archive/refs/tags/4.0.0.tar.gz",
-                "https://github.com/bazelbuild/rules_proto/archive/refs/tags/4.0.0.tar.gz",
+                "https://github.com/bazelbuild/rules_proto/archive/refs/tags/5.3.0-21.7.tar.gz",
             ],
         )
 
@@ -21,9 +30,9 @@ def nanopb_deps():
     if "rules_python" not in native.existing_rules():
         http_archive(
             name = "rules_python",
-            sha256 = "5fa3c738d33acca3b97622a13a741129f67ef43f5fdfcec63b29374cc0574c29",
-            strip_prefix = "rules_python-0.9.0",
-            url = "https://github.com/bazelbuild/rules_python/archive/refs/tags/0.9.0.tar.gz",
+            sha256 = "c68bdc4fbec25de5b5493b8819cfc877c4ea299c0dcb15c244c5a00208cde311",
+            strip_prefix = "rules_python-0.31.0",
+            url = "https://github.com/bazelbuild/rules_python/releases/download/0.31.0/rules_python-0.31.0.tar.gz",
         )
 
     # Setup grpc tools.

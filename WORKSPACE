@@ -11,6 +11,10 @@ python_register_toolchains(
     python_version = "3.9",
 )
 
+load("@rules_python//python:repositories.bzl", "py_repositories")
+
+py_repositories()
+
 load("//extra/bazel:python_deps.bzl", "nanopb_python_deps")
 
 load("@python3_9//:defs.bzl", "interpreter")
